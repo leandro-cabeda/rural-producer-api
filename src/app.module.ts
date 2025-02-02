@@ -11,8 +11,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     ProducerModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: '127.0.0.1', // configuraçao do banco para rodar local na maquina
-      //host: 'db', // configuraçao do banco para rodar api no docker como um container e conectando no banco postgres em outro container
+ //     host: '127.0.0.1', // configuraçao do banco para rodar local na maquina
+      host: 'db', // configuraçao do banco para rodar api no docker como um container e conectando no banco postgres em outro container
       port: 5432,
       username: 'admin',
       password: 'admin',
