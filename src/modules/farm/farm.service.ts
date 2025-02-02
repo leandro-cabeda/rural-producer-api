@@ -48,9 +48,8 @@ export class FarmService {
     }
 
     const farm = this.farmRepository.create(data);
-    await this.farmRepository.insert(farm);
+    return await this.farmRepository.save(farm);
 
-    return farm;
   }
 
   async findAll(): Promise<Farm[]> {

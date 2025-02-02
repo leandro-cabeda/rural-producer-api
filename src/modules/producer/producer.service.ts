@@ -29,7 +29,7 @@ export class ProducerService {
         }
 
         if(data.id) delete data.id;
-        
+
         for (const farm of data.farms) {
             if (farm.id) delete farm.id;
         
@@ -51,9 +51,8 @@ export class ProducerService {
         }
 
         const producer = this.producerRepository.create(data);
-        await this.producerRepository.insert(producer);
+        return await this.producerRepository.save(producer);
 
-        return producer;
     }
 
     async findAll(): Promise<Producer[]> {
