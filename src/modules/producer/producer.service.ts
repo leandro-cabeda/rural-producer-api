@@ -50,8 +50,12 @@ export class ProducerService {
             }
         }
 
-        const producer = this.producerRepository.create(data);
-        return await this.producerRepository.save(producer);
+        const producer = await this.producerRepository
+        .upsert(data, 
+            ['cpfCnpj', 'name', 'farms']
+        );
+
+        return producer.raw[0];
 
     }
 
