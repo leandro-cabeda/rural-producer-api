@@ -28,3 +28,6 @@ O objetivo é criar uma aplicação para gerenciar o cadastro de produtores rura
 
 ## Interface Swagger da Api URL Online pelo Render Plataforma
 - https://rural-producer-api.onrender.com/api
+
+## Interface do Sistema da Api URL Online pelo Render Plataforma
+- https://rural-producer-api.onrender.com/producers
