@@ -80,6 +80,11 @@ export class ProducerService {
         this.logger.log(`Buscando produtor: ${id}`);
         id = Number(id);
 
+        if (isNaN(id)) {
+            this.logger.error('Id inválido');
+            throw new BadRequestException('Id inválido');
+        }
+
         const producer = await this.producerRepository
             .createQueryBuilder("producer")
             .leftJoinAndSelect("producer.farms", "farm")
@@ -99,6 +104,12 @@ export class ProducerService {
     async update(id: number, data: Producer): Promise<Producer> {
         this.logger.log(`Atualizando produtor: ${id}`);
         id = Number(id);
+
+        if (isNaN(id)) {
+            this.logger.error('Id inválido');
+            throw new BadRequestException('Id inválido');
+        }
+
         const producer = await this.findOne(id);
 
         if (!producer) {
@@ -126,6 +137,12 @@ export class ProducerService {
     async delete(id: number): Promise<boolean> {
         this.logger.log(`Deletando produtor: ${id}`);
         id = Number(id);
+
+        if (isNaN(id)) {
+            this.logger.error('Id inválido');
+            throw new BadRequestException('Id inválido');
+        }
+
         const producer = await this.findOne(id);
 
         if (!producer) {

@@ -29,14 +29,14 @@ export class FarmService {
       throw new NotFoundException('Produtor não encontrado');
     }
 
-    if (data.id) delete data.id;
+    delete data.id;
 
     for (const crop of data.crops) {
-      if (crop.id) delete crop.id;
+      delete crop.id;
     }
 
     for (const harvest of data.harvests) {
-      if (harvest.id) delete harvest.id;
+      delete harvest.id;
 
       for (const crop of data.crops) {
         if (harvest.crops.find(c => c.name === crop.name)) {
@@ -47,8 +47,7 @@ export class FarmService {
       delete harvest.crops;
     }
 
-    const farm = this.farmRepository.create(data);
-    return await this.farmRepository.save(farm);
+    return await this.farmRepository.save(data);
 
   }
 
@@ -84,6 +83,11 @@ export class FarmService {
     this.logger.log(`Buscando fazenda: ${id}`);
     id = Number(id);
 
+    if (isNaN(id)) {
+      this.logger.error('Id inválido');
+      throw new BadRequestException('Id inválido');
+    }
+
     const farm = await this.farmRepository
       .createQueryBuilder('farm')
       .leftJoinAndSelect('farm.producer', 'producer')
@@ -104,6 +108,12 @@ export class FarmService {
   async delete(id: number): Promise<void> {
     this.logger.log(`Deletando fazenda: ${id}`);
     id = Number(id);
+
+    if (isNaN(id)) {
+      this.logger.error('Id inválido');
+      throw new BadRequestException('Id inválido');
+    }
+
     const farm = await this.findOne(id);
 
     if (!farm) {
@@ -117,6 +127,12 @@ export class FarmService {
   async update(id: number, data: Farm): Promise<Farm> {
 
     id = Number(id);
+
+    if (isNaN(id)) {
+      this.logger.error('Id inválido');
+      throw new BadRequestException('Id inválido');
+    }
+
     this.logger.log("Validando as informações da fazenda");
     this.validateFarmAreas(data);
 
