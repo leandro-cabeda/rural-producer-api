@@ -22,6 +22,9 @@ O objetivo é criar uma aplicação para gerenciar o cadastro de produtores rura
 - Se executar o docker para subir o container da Api, precisa ir no arquivo app.module para alterar o host da conexão do banco de dados.
 
 
-
-## Interface Swagger da Api URL
+## Interface Swagger da Api URL Local
 - Acesse (http://localhost:3000/api) depois que subir a aplicação
+
+
+## Interface Swagger da Api URL Online pelo Render Plataforma
+- https://rural-producer-api.onrender.com/api

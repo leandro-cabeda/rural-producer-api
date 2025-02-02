@@ -11,17 +11,16 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     ProducerModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: "dpg-cufmfma3esus73e2a54g-a",
-
+      host: "dpg-cufmfma3esus73e2a54g-a", // host do banco online na plataforma Render
       //host: '127.0.0.1', // configuraçao do banco para rodar local na maquina
       //host: 'db', // configuraçao do banco para rodar api no docker como um container e conectando no banco postgres em outro container
       port: 5432,
       username: 'admin',
-      //password: 'admin',
-      password: 'y0Ed5Ext6xjipQzhfnYIpeuvAfpIRZGX',
+      //password: 'admin', // senha do banco local e também do banco do docker criado
+      password: 'y0Ed5Ext6xjipQzhfnYIpeuvAfpIRZGX', // senha do banco online na plataforma Render
       database: 'rural_producer',
       autoLoadEntities: true,
-      synchronize: true,
+      synchronize: false, // false se estiver em produção, para teste em desenvolvimento deixe true
       entities: [__dirname + '/**/**/*.entity{.ts,.js}'],
     }),
   ],
