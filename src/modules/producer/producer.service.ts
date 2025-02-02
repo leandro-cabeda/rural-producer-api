@@ -28,24 +28,24 @@ export class ProducerService {
             throw new BadRequestException('Produtor ja cadastrado');
         }
 
-        if(data.id) delete data.id;
+        delete data.id;
 
         for (const farm of data.farms) {
-            if (farm.id) delete farm.id;
-        
+            delete farm.id;
+
             for (const crop of farm.crops) {
-                if (crop.id) delete crop.id;
+                delete crop.id;
             }
-        
+
             for (const harvest of farm.harvests) {
-                if (harvest.id) delete harvest.id;
-        
+                delete harvest.id;
+
                 for (const crop of farm.crops) {
                     if (harvest.crops.find(c => c.name === crop.name)) {
                         crop.harvest = harvest;
                     }
                 }
-        
+
                 delete harvest.crops;
             }
         }
@@ -53,9 +53,9 @@ export class ProducerService {
         console.log("data: ", JSON.stringify(data));
 
         const producer = await this.producerRepository
-        .upsert(data, 
-            ['cpfCnpj', 'name']
-        );
+            .upsert(data,
+                ['cpfCnpj', 'name']
+            );
 
         console.log("producer.raw[0]: ", JSON.stringify(producer.raw[0]));
 
@@ -85,7 +85,7 @@ export class ProducerService {
     async findOne(id: number): Promise<Producer> {
         this.logger.log(`Buscando produtor: ${id}`);
         id = Number(id);
-        
+
         const producer = await this.producerRepository
             .createQueryBuilder("producer")
             .leftJoinAndSelect("producer.farms", "farm")
