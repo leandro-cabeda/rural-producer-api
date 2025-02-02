@@ -29,12 +29,28 @@ export class FarmService {
       throw new NotFoundException('Produtor não encontrado');
     }
 
-    const farm = this.farmRepository.create({
-      ...data,
-      producer,
-    });
+    if (data.id) delete data.id;
 
-    return await this.farmRepository.save(farm);
+    for (const crop of data.crops) {
+      if (crop.id) delete crop.id;
+    }
+
+    for (const harvest of data.harvests) {
+      if (harvest.id) delete harvest.id;
+
+      for (const crop of data.crops) {
+        if (harvest.crops.find(c => c.name === crop.name)) {
+          crop.harvest = harvest;
+        }
+      }
+
+      delete harvest.crops;
+    }
+
+    const farm = this.farmRepository.create(data);
+    await this.farmRepository.insert(farm);
+
+    return farm;
   }
 
   async findAll(): Promise<Farm[]> {

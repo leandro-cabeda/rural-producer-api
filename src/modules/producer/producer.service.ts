@@ -28,28 +28,32 @@ export class ProducerService {
             throw new BadRequestException('Produtor ja cadastrado');
         }
 
+        if(data.id) delete data.id;
+        
         for (const farm of data.farms) {
-            delete farm.id;
-
+            if (farm.id) delete farm.id;
+        
             for (const crop of farm.crops) {
-                delete crop.id;
+                if (crop.id) delete crop.id;
             }
-
+        
             for (const harvest of farm.harvests) {
-                delete harvest.id;
-
+                if (harvest.id) delete harvest.id;
+        
                 for (const crop of farm.crops) {
                     if (harvest.crops.find(c => c.name === crop.name)) {
                         crop.harvest = harvest;
                     }
                 }
-
+        
                 delete harvest.crops;
             }
         }
 
         const producer = this.producerRepository.create(data);
-        return await this.producerRepository.save(producer);
+        await this.producerRepository.insert(producer);
+
+        return producer;
     }
 
     async findAll(): Promise<Producer[]> {
