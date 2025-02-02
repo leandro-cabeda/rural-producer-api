@@ -50,10 +50,14 @@ export class ProducerService {
             }
         }
 
+        console.log("data: ", JSON.stringify(data));
+
         const producer = await this.producerRepository
         .upsert(data, 
-            ['cpfCnpj', 'name', 'farms']
+            ['cpfCnpj', 'name']
         );
+
+        console.log("producer.raw[0]: ", JSON.stringify(producer.raw[0]));
 
         return producer.raw[0];
 
