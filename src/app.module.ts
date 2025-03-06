@@ -21,7 +21,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       //password: 'y0Ed5Ext6xjipQzhfnYIpeuvAfpIRZGX', // senha do banco online na plataforma Render
       //database: 'rural_producer',
       autoLoadEntities: true,
-      synchronize: false, // false se estiver em produção, para teste em desenvolvimento deixe true
+      synchronize: true, // false se estiver em produção, para teste em desenvolvimento deixe true
       entities: [__dirname + '/**/**/*.entity{.ts,.js}'],
       ssl: {
         rejectUnauthorized: false, // ⚠️ Importante para conexão externa no Railway
