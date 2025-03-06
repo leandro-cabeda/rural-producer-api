@@ -4,6 +4,9 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 @Module({
   imports: [
@@ -11,14 +14,15 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     ProducerModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: "dpg-cufmfma3esus73e2a54g-a", // host do banco online na plataforma Render
+      url: process.env.DATABASE_URL, // variavel de ambiente para conexão com o banco online na plataforma railway
+      //host: "dpg-cufmfma3esus73e2a54g-a", // host do banco online na plataforma Render
       //host: '127.0.0.1', // configuraçao do banco para rodar local na maquina
       //host: 'db', // configuraçao do banco para rodar api no docker como um container e conectando no banco postgres em outro container
-      port: 5432,
-      username: 'admin',
+      //port: 5432,
+      //username: 'admin',
       //password: 'admin', // senha do banco local e também do banco do docker criado
-      password: 'y0Ed5Ext6xjipQzhfnYIpeuvAfpIRZGX', // senha do banco online na plataforma Render
-      database: 'rural_producer',
+      //password: 'y0Ed5Ext6xjipQzhfnYIpeuvAfpIRZGX', // senha do banco online na plataforma Render
+      //database: 'rural_producer',
       autoLoadEntities: true,
       synchronize: false, // false se estiver em produção, para teste em desenvolvimento deixe true
       entities: [__dirname + '/**/**/*.entity{.ts,.js}'],
