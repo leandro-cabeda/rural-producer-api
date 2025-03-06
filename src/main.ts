@@ -3,10 +3,11 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as dotenv from 'dotenv';
 
-dotenv.config();
-console.log("process.env.DATABASE_URL: ",  process.env.DATABASE_URL);
 
 async function bootstrap() {
+  dotenv.config();
+  console.log("process.env.DATABASE_URL: ", process.env.DATABASE_URL);
+
   const app = await NestFactory.create(AppModule);
   app.enableCors({
     origin: '*',
