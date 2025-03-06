@@ -4,6 +4,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
+console.log("process.env.DATABASE_URL: ",  process.env.DATABASE_URL);
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -22,8 +23,6 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
-
-  console.log("process.env.DATABASE_URL: ",  process.env.DATABASE_URL);
 
   await app.listen(process.env.PORT ?? 3000);
 }
