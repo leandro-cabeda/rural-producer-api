@@ -11,7 +11,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     ProducerModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
-      url: process.env.DATABASE_URL, // variavel de ambiente para conexão com o banco online na plataforma railway
+      url: "postgresql://postgres:pJzbcWDmUBcRIYEbDwiAxuqeWnktDMoz@tramway.proxy.rlwy.net:20601/railway", // variavel de ambiente para conexão com o banco online na plataforma railway
       //host: "dpg-cufmfma3esus73e2a54g-a", // host do banco online na plataforma Render
       //host: '127.0.0.1', // configuraçao do banco para rodar local na maquina
       //host: 'db', // configuraçao do banco para rodar api no docker como um container e conectando no banco postgres em outro container
